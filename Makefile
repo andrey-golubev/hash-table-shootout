@@ -1,12 +1,31 @@
 CXX=clang++
 CXX_FLAGS=-O3 -march=native -std=c++17 -DNDEBUG
 
-all: build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash
+all: build/std_vector build/std_vector515 build/qlist_qt6 build/qlist_qt515 build/qvector_qt515
+#build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash
 # build/spp_sparse_hash_map build/emilib_hash_map build/ska_flat_hash_map build/ska_flat_hash_map_power_of_two build/tsl_hopscotch_map build/tsl_hopscotch_map_mlf_0_5 build/tsl_hopscotch_map_store_hash build/tsl_robin_map build/tsl_robin_map_mlf_0_9 build/tsl_robin_map_store_hash build/tsl_robin_pg_map build/tsl_sparse_map build/tsl_ordered_map
 
 clean:
 	rm -r build/*
 
+# arrays:
+build/std_vector: src/std_vector.cc src/contiguous_containers_template.cc
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/qt5/qtbase/lib/ -I${HOME}/work/build/qt5/qtbase/include/ -lQt6Core -o build/std_vector src/std_vector.cc -fPIC
+
+build/qlist_qt6: src/qt_qlist.cc src/contiguous_containers_template.cc
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/qt5/qtbase/lib/ -I${HOME}/work/build/qt5/qtbase/include/ -lQt6Core -o build/qlist_qt6 src/qt_qlist.cc -fPIC
+
+build/std_vector515: src/std_vector.cc src/contiguous_containers_template.cc
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/5.15/qtbase/lib/ -I${HOME}/work/build/5.15/qtbase/include/ -lQt5Core -o build/std_vector src/std_vector.cc -fPIC
+
+build/qlist_qt515: src/qt_qlist515.cc src/contiguous_containers_template.cc
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/5.15/qtbase/lib/ -I${HOME}/work/build/5.15/qtbase/include/ -lQt5Core -o build/qlist_qt515 src/qt_qlist515.cc -fPIC
+
+build/qvector_qt515: src/qt_qvector.cc src/contiguous_containers_template.cc
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/5.15/qtbase/lib/ -I${HOME}/work/build/5.15/qtbase/include/ -lQt5Core -o build/qvector_qt515 src/qt_qvector.cc -fPIC
+
+
+# maps/hashes
 build/std_unordered_map: src/std_unordered_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -lm -o build/std_unordered_map src/std_unordered_map.cc
 
