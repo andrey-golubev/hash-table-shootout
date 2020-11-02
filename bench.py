@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import sys, os, subprocess, signal
 
 programs = [
@@ -7,25 +9,25 @@ programs = [
     'google_dense_hash_map',
     'google_dense_hash_map_mlf_0_9',
     'qt_qhash',
-    'spp_sparse_hash_map',
-    'emilib_hash_map',
-    'ska_flat_hash_map',
-    'ska_flat_hash_map_power_of_two',
-    'tsl_sparse_map',
-    'tsl_hopscotch_map',
-    'tsl_hopscotch_map_mlf_0_5',
-    'tsl_hopscotch_map_store_hash',
-    'tsl_robin_map',
-    'tsl_robin_map_mlf_0_9',
-    'tsl_robin_map_store_hash',
-    'tsl_robin_pg_map',
-    'tsl_ordered_map',
+#    'spp_sparse_hash_map',
+#    'emilib_hash_map',
+#    'ska_flat_hash_map',
+#    'ska_flat_hash_map_power_of_two',
+#    'tsl_sparse_map',
+#    'tsl_hopscotch_map',
+#    'tsl_hopscotch_map_mlf_0_5',
+#    'tsl_hopscotch_map_store_hash',
+#    'tsl_robin_map',
+#    'tsl_robin_map_mlf_0_9',
+#    'tsl_robin_map_store_hash',
+#    'tsl_robin_pg_map',
+#    'tsl_ordered_map',
     #'tsl_array_map',
     #'tsl_array_map_mlf_1_0'
 ]
 
 minkeys  =  2*100*1000
-maxkeys  = 30*100*1000
+maxkeys  = 10*100*1000
 interval =  2*100*1000
 best_out_of = 5
 

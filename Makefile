@@ -1,7 +1,11 @@
 CXX=clang++
-CXX_FLAGS=-O3 -march=native -std=c++14 -DNDEBUG
+CXX_FLAGS=-O3 -march=native -std=c++17 -DNDEBUG
 
-all: build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash build/spp_sparse_hash_map build/emilib_hash_map build/ska_flat_hash_map build/ska_flat_hash_map_power_of_two build/tsl_hopscotch_map build/tsl_hopscotch_map_mlf_0_5 build/tsl_hopscotch_map_store_hash build/tsl_robin_map build/tsl_robin_map_mlf_0_9 build/tsl_robin_map_store_hash build/tsl_robin_pg_map build/tsl_sparse_map build/tsl_ordered_map
+all: build/std_unordered_map build/boost_unordered_map build/google_sparse_hash_map build/google_dense_hash_map build/google_dense_hash_map_mlf_0_9 build/qt_qhash
+# build/spp_sparse_hash_map build/emilib_hash_map build/ska_flat_hash_map build/ska_flat_hash_map_power_of_two build/tsl_hopscotch_map build/tsl_hopscotch_map_mlf_0_5 build/tsl_hopscotch_map_store_hash build/tsl_robin_map build/tsl_robin_map_mlf_0_9 build/tsl_robin_map_store_hash build/tsl_robin_pg_map build/tsl_sparse_map build/tsl_ordered_map
+
+clean:
+	rm -r build/*
 
 build/std_unordered_map: src/std_unordered_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -lm -o build/std_unordered_map src/std_unordered_map.cc
@@ -19,7 +23,8 @@ build/google_dense_hash_map_mlf_0_9: src/google_dense_hash_map_mlf_0_9.cc src/te
 	$(CXX) $(CXX_FLAGS) -lm -o build/google_dense_hash_map_mlf_0_9 src/google_dense_hash_map_mlf_0_9.cc
 
 build/qt_qhash: src/qt_qhash.cc src/template.c
-	$(CXX) $(CXX_FLAGS) -lm `pkg-config --cflags --libs QtCore` -o build/qt_qhash src/qt_qhash.cc
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/qt5/qtbase/lib/ -lQt6Core -o build/qt_qhash src/qt_qhash.cc -fPIC
+#	$(CXX) $(CXX_FLAGS) -lm `pkg-config --cflags --libs QtCore` -o build/qt_qhash src/qt_qhash.cc
 
 build/spp_sparse_hash_map: src/spp_sparse_hash_map.cc src/template.c
 	$(CXX) $(CXX_FLAGS) -Isparsepp -o build/spp_sparse_hash_map src/spp_sparse_hash_map.cc
