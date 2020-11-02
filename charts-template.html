@@ -15,7 +15,7 @@
                                     "background-color": "#fee",
                                     opacity: 0.80
                                   }).appendTo("body");
-                
+
     series_settings = {
         lines: { show: true },
         points: { show: true }
@@ -24,12 +24,12 @@
     grid_settings = { tickColor: '#ddd', hoverable: true };
 
     xaxis_settings = {
-        tickFormatter: function(num, obj) { 
+        tickFormatter: function(num, obj) {
                            if(num >= 1000*1000) {
-                               return parseFloat(num/(1000*1000)).toFixed(2) + 'M'; 
+                               return parseFloat(num/(1000*1000)).toFixed(2) + 'M';
                            }
                            else {
-                               return parseInt(num/1000) + 'k'; 
+                               return parseInt(num/1000) + 'k';
                            }
                        }
     };
@@ -73,22 +73,22 @@
                 val.color = color;
                 color++;
             });
-            
-            // Insert checkboxes 
+
+            // Insert checkboxes
             $.each(dataset, function(key, val) {
                 checked = '';
                 if(default_programs_show.indexOf(val.program) > -1) {
                     checked = 'checked';
                 }
-                
+
                 $(choices_container).append(
                     "<li><input type='checkbox' value='" + key +"' name='" + val.program + "' " + checked + "></input>" +
                     "<label for='id" + key + "'>" + val.label + "</label></li>");
             });
-            
+
             $(choices_container).find("input").change(plot_according_to_choices);
         }
-        
+
         function plot_according_to_choices() {
             var data = [];
             $(choices_container).find("input:checked").each(
@@ -101,7 +101,7 @@
             );
 
             $.plot(chart_container, data, chart_settings);
-            
+
 
             $(chart_container).bind("plothover", function (event, pos, item) {
                 if (item) {
@@ -115,23 +115,67 @@
                     if(load_factor == 0.0) {
                         load_factor = "unknown"
                     }
-                    
-                    $("#tooltip").html("" + y + " ; " + x + 
+
+                    $("#tooltip").html("" + y + " ; " + x +
                                         "<br\>" + load_factor + " load factor" +
                                         "<br\>" + item.series.label)
                                     .css({top: item.pageY+5, left: item.pageX+5})
                                     .fadeIn(200);
                 } else {
                     $("#tooltip").hide();
-                }        
+                }
             });
         }
 
         plot_according_to_choices();
     }
-    
-    
+
+
     function plot_all_charts(redraw_only = false) {
+        plot_chart(chart_data['append_int_runtime'], '#append_int', '#append_int_choices', runtime_settings, redraw_only);
+        // TODO: what's with append_int_memory? - same?
+
+        // plot_chart(chart_data['prepend_int_runtime'], '#prepend_int', '#prepend_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_mid_int_runtime'], '#insert1_mid_int', '#insert1_mid_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_quarter_int_runtime'], '#insert1_quarter_int', '#insert1_quarter_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_last_quarter_int_runtime'], '#insert1_last_quarter_int', '#insert1_last_quarter_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['access_every_int_runtime'], '#access_every_int', '#access_every_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_first_int_runtime'], '#remove_first_int', '#remove_first_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_mid_int_runtime'], '#remove_mid_int', '#remove_mid_int_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_last_int_runtime'], '#remove_last_int', '#remove_last_int_choices', runtime_settings, redraw_only);
+
+        // plot_chart(chart_data['append_qstr'], '#append_qstr', '#append_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['prepend_qstr'], '#prepend_qstr', '#prepend_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_mid_qstr'], '#insert1_mid_qstr', '#insert1_mid_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_quarter_qstr'], '#insert1_quarter_qstr', '#insert1_quarter_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_last_quarter_qstr'], '#insert1_last_quarter_qstr', '#insert1_last_quarter_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['access_every_qstr'], '#access_every_qstr', '#access_every_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_first_qstr'], '#remove_first_qstr', '#remove_first_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_mid_qstr'], '#remove_mid_qstr', '#remove_mid_qstr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_last_qstr'], '#remove_last_qstr', '#remove_last_qstr_choices', runtime_settings, redraw_only);
+
+        // plot_chart(chart_data['append_stdstr'], '#append_stdstr', '#append_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['prepend_stdstr'], '#prepend_stdstr', '#prepend_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_mid_stdstr'], '#insert1_mid_stdstr', '#insert1_mid_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_quarter_stdstr'], '#insert1_quarter_stdstr', '#insert1_quarter_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_last_quarter_stdstr'], '#insert1_last_quarter_stdstr', '#insert1_last_quarter_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['access_every_stdstr'], '#access_every_stdstr', '#access_every_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_first_stdstr'], '#remove_first_stdstr', '#remove_first_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_mid_stdstr'], '#remove_mid_stdstr', '#remove_mid_stdtr_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_last_stdstr'], '#remove_last_stdstr', '#remove_last_stdtr_choices', runtime_settings, redraw_only);
+
+        // plot_chart(chart_data['append_three_ptrs'], '#append_three_ptrs', '#append_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['prepend_three_ptrs'], '#prepend_three_ptrs', '#prepend_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_mid_three_ptrs'], '#insert1_mid_three_ptrs', '#insert1_mid_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_quarter_three_ptrs'], '#insert1_quarter_three_ptrs', '#insert1_quarter_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['insert1_last_quarter_three_ptrs'], '#insert1_last_quarter_three_ptrs', '#insert1_last_quarter_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['access_every_three_ptrs'], '#access_every_three_ptrs', '#access_every_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_first_three_ptrs'], '#remove_first_three_ptrs', '#remove_first_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_mid_three_ptrs'], '#remove_mid_three_ptrs', '#remove_mid_three_ptrs_choices', runtime_settings, redraw_only);
+        // plot_chart(chart_data['remove_last_three_ptrs'], '#remove_last_three_ptrs', '#remove_last_three_ptrs_choices', runtime_settings, redraw_only);
+
+
+        /*
         plot_chart(chart_data['insert_random_shuffle_range_runtime'], '#insert_random_shuffle_range_runtime', '#insert_random_shuffle_range_runtime_choices', runtime_settings, redraw_only);
         plot_chart(chart_data['read_random_shuffle_range_runtime'], '#read_random_shuffle_range_runtime', '#read_random_shuffle_range_runtime_choices', runtime_settings, redraw_only);
         plot_chart(chart_data['insert_random_full_runtime'], '#insert_random_full_runtime', '#insert_random_full_runtime_choices', runtime_settings, redraw_only);
@@ -143,7 +187,7 @@
         plot_chart(chart_data['delete_random_full_runtime'], '#delete_random_full_runtime', '#delete_random_full_runtime_choices', runtime_settings, redraw_only);
         plot_chart(chart_data['insert_random_full_memory'], '#insert_random_full_memory', '#insert_random_full_memory_choices', memory_settings, redraw_only);
         plot_chart(chart_data['insert_random_full_reserve_memory'], '#insert_random_full_reserve_memory', '#insert_random_full_reserve_memory_choices', memory_settings, redraw_only);
-        
+
         plot_chart(chart_data['insert_small_string_runtime'], '#insert_small_string_runtime', '#insert_small_string_runtime_choices', runtime_settings, redraw_only);
         plot_chart(chart_data['insert_small_string_reserve_runtime'], '#insert_small_string_reserve_runtime', '#insert_small_string_reserve_runtime_choices', runtime_settings, redraw_only);
         plot_chart(chart_data['read_small_string_runtime'], '#read_small_string_runtime', '#read_small_string_runtime_choices', runtime_settings, redraw_only);
@@ -161,6 +205,7 @@
         plot_chart(chart_data['delete_string_runtime'], '#delete_string_runtime', '#delete_string_runtime_choices', runtime_settings, redraw_only);
         plot_chart(chart_data['insert_string_memory'], '#insert_string_memory', '#insert_string_memory_choices', memory_settings, redraw_only);
         plot_chart(chart_data['insert_string_reserve_memory'], '#insert_string_reserve_memory', '#insert_string_reserve_memory_choices', memory_settings, redraw_only);
+        */
     }
 
     $(function () {
@@ -171,15 +216,15 @@
             if(default_programs_show.indexOf(program) > -1) {
                 checked = 'checked';
             }
-            
-            $("#global_choices").append("<li><input type='checkbox' id='global_choice_" + i + "' " + 
+
+            $("#global_choices").append("<li><input type='checkbox' id='global_choice_" + i + "' " +
                                         checked + "></input>" + programs[program] + "</li>");
             $("#global_choice_" + i).change({name: program}, function(event) {
                 $("input[name='" + event.data.name + "']").prop('checked', this.checked).change();
             });
             i++;
         }
-        
+
         // Set select all link
         $("#global_select_all_none").append("<a href='javascript:void(0);' id='global_select_all'>all</a> ");
         $("#global_select_all").click(function() {
@@ -193,11 +238,11 @@
             $("input").prop('checked', false);
             plot_all_charts(true);
         });
-        
+
         // Draw charts
         plot_all_charts();
     });
-    
+
 </script>
 
 <style>
@@ -238,10 +283,20 @@
 <p>For the integers tests, we use hash maps with int64_t as key and int64_t as value.</p>
 
 
+<h3>Append one element: execution time (integers)</h3>
 
-<h3>Random shuffle inserts: execution time (integers)</h3>
+<p>Appending one element into a container, without prior space reservation.</p>
 
-<p>Before the test, we generate a vector with the values [0, nb_entries) and shuffle this vector. 
+<div class="chart" id="append_int"></div>
+<div class="xaxis-title">number of entries in container</div>
+<ul class="choices" id="append_int_choices"></ul>
+
+
+
+
+<!-- <h3>Random shuffle inserts: execution time (integers)</h3>
+
+<p>Before the test, we generate a vector with the values [0, nb_entries) and shuffle this vector.
 Then for each value k in the vector, we insert the key-value pair (k, 1) in the hash map.</p>
 
 <div class="chart" id="insert_random_shuffle_range_runtime"></div>
@@ -251,7 +306,7 @@ Then for each value k in the vector, we insert the key-value pair (k, 1) in the 
 
 <h3>Random full inserts: execution time (integers)</h3>
 
-<p>Before the test, we generate a vector of nb_entries size where each value is randomly taken from an uniform random number generator from all possible positive values an int64_t can hold. 
+<p>Before the test, we generate a vector of nb_entries size where each value is randomly taken from an uniform random number generator from all possible positive values an int64_t can hold.
 Then for each value k in the vector, we insert the key-value pair (k, 1) in the hash map.</p>
 
 <div class="chart" id="insert_random_full_runtime"></div>
@@ -261,7 +316,7 @@ Then for each value k in the vector, we insert the key-value pair (k, 1) in the 
 
 <h3>Random full inserts with reserve: execution time (integers)</h3>
 
-<p>Same as the random full inserts test but the reserve method of the hash map is called beforehand to avoid any rehash during the insertion. 
+<p>Same as the random full inserts test but the reserve method of the hash map is called beforehand to avoid any rehash during the insertion.
 It provides a fair comparison even if the growth factor of each hash map is different.</p>
 
 <div class="chart" id="insert_random_full_reserve_runtime"></div>
@@ -271,7 +326,7 @@ It provides a fair comparison even if the growth factor of each hash map is diff
 
 <h3>Random full deletes: execution time (integers)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the random full insert test. 
+<p>Before the test, we insert nb_entries elements in the same way as in the random full insert test.
 We then delete each key one by one in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="delete_random_full_runtime"></div>
@@ -281,7 +336,7 @@ We then delete each key one by one in a different and random order than the one 
 
 <h3>Random shuffle reads: execution time (integers)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the random shuffle inserts test. 
+<p>Before the test, we insert nb_entries elements in the same way as in the random shuffle inserts test.
 We then read each key-value pair in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="read_random_shuffle_range_runtime"></div>
@@ -291,7 +346,7 @@ We then read each key-value pair in a different and random order than the one th
 
 <h3>Random full reads: execution time (integers)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test. 
+<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test.
 We then read each key-value pair in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="read_random_full_runtime"></div>
@@ -300,8 +355,8 @@ We then read each key-value pair in a different and random order than the one th
 
 <h3>Random full reads misses: execution time (integers)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test. 
-We then generate another vector of nb_entries random elements different from the inserted elements and 
+<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test.
+We then generate another vector of nb_entries random elements different from the inserted elements and
 we try to search for these unknown elements in the hash map.</p>
 
 <div class="chart" id="read_miss_random_full_runtime"></div>
@@ -311,8 +366,8 @@ we try to search for these unknown elements in the hash map.</p>
 
 <h3>Random full reads after deleting half: execution time (integers)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test 
-before deleting half of these values randomly. We then try to read all the original values in a 
+<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test
+before deleting half of these values randomly. We then try to read all the original values in a
 different order which will lead to 50% hits and 50% misses.</p>
 
 <div class="chart" id="read_random_full_after_delete_runtime"></div>
@@ -323,7 +378,7 @@ different order which will lead to 50% hits and 50% misses.</p>
 
 <h3>Random full iteration: execution time (integers)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test. 
+<p>Before the test, we insert nb_entries elements in the same way as in the random full inserts test.
 We then use the hash map iterators to read all the key-value pairs.</p>
 
 <div class="chart" id="iteration_random_full_runtime"></div>
@@ -343,7 +398,7 @@ We then use the hash map iterators to read all the key-value pairs.</p>
 
 <h3>Memory usage of random full inserts with reserve (integers)</h3>
 
-<p>Before the random full inserts with reserve benchmark finishes, we measure the memory that the hash map is using. 
+<p>Before the random full inserts with reserve benchmark finishes, we measure the memory that the hash map is using.
 The benchmark is similar to the one above but without measuring the memory fragmentation that the rehash process
 may cause.</p>
 
@@ -375,7 +430,7 @@ may cause.</p>
 
 <h3>Inserts with reserve: execution time (small strings)</h3>
 
-<p>Same as the inserts test but the reserve method of the hash map is called beforehand to avoid any rehash during the insertion. 
+<p>Same as the inserts test but the reserve method of the hash map is called beforehand to avoid any rehash during the insertion.
 It provides a fair comparison even if the growth factor of each hash map is different.</p>
 
 <div class="chart" id="insert_small_string_reserve_runtime"></div>
@@ -385,7 +440,7 @@ It provides a fair comparison even if the growth factor of each hash map is diff
 
 <h3>Deletes: execution time (small strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test. 
+<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test.
 We then delete each key one by one in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="delete_small_string_runtime"></div>
@@ -395,7 +450,7 @@ We then delete each key one by one in a different and random order than the one 
 
 <h3>Reads: execution time (small strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test. 
+<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test.
 We then read each key-value pair in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="read_small_string_runtime"></div>
@@ -405,8 +460,8 @@ We then read each key-value pair in a different and random order than the one th
 
 <h3>Reads misses: execution time (small strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the inserts test. 
-We then generate nb_entries strings different from the inserted elements and 
+<p>Before the test, we insert nb_entries elements in the same way as in the inserts test.
+We then generate nb_entries strings different from the inserted elements and
 we try to search for these unknown elements in the hash map.</p>
 
 <div class="chart" id="read_miss_small_string_runtime"></div>
@@ -416,8 +471,8 @@ we try to search for these unknown elements in the hash map.</p>
 
 <h3>Reads after deleting half: execution time (small strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the inserts test before 
-deleting half of these values randomly. We then try to read all the original values in a 
+<p>Before the test, we insert nb_entries elements in the same way as in the inserts test before
+deleting half of these values randomly. We then try to read all the original values in a
 different order which will lead to 50% hits and 50% misses.</p>
 
 <div class="chart" id="read_small_string_after_delete_runtime"></div>
@@ -464,7 +519,7 @@ may cause.</p>
 
 <h3>Inserts with reserve: execution time (strings)</h3>
 
-<p>Same as the inserts test but the reserve method of the hash map is called beforehand to avoid any rehash during the insertion. 
+<p>Same as the inserts test but the reserve method of the hash map is called beforehand to avoid any rehash during the insertion.
 It provides a fair comparison even if the growth factor of each hash map is different.</p>
 
 <div class="chart" id="insert_string_reserve_runtime"></div>
@@ -474,7 +529,7 @@ It provides a fair comparison even if the growth factor of each hash map is diff
 
 <h3>Deletes: execution time (strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test. 
+<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test.
 We then delete each key one by one in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="delete_string_runtime"></div>
@@ -484,7 +539,7 @@ We then delete each key one by one in a different and random order than the one 
 
 <h3>Reads: execution time (strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test. 
+<p>Before the test, we insert nb_entries elements in the hash map as in the inserts test.
 We then read each key-value pair in a different and random order than the one they were inserted.</p>
 
 <div class="chart" id="read_string_runtime"></div>
@@ -494,8 +549,8 @@ We then read each key-value pair in a different and random order than the one th
 
 <h3>Reads misses: execution time (strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the inserts test. 
-We then generate nb_entries strings different from the inserted elements and 
+<p>Before the test, we insert nb_entries elements in the same way as in the inserts test.
+We then generate nb_entries strings different from the inserted elements and
 we try to search for these unknown elements in the hash map.</p>
 
 <div class="chart" id="read_miss_string_runtime"></div>
@@ -505,7 +560,7 @@ we try to search for these unknown elements in the hash map.</p>
 
 <h3>Reads after deleting half: execution time (strings)</h3>
 
-<p>Before the test, we insert nb_entries elements in the same way as in the inserts test before deleting half of these values randomly. 
+<p>Before the test, we insert nb_entries elements in the same way as in the inserts test before deleting half of these values randomly.
 We then try to read all the original values in a different order which will lead to 50% hits and 50% misses.</p>
 
 <div class="chart" id="read_string_after_delete_runtime"></div>
@@ -530,7 +585,7 @@ may cause.</p>
 
 <div class="chart" id="insert_string_reserve_memory"></div>
 <div class="xaxis-title">number of entries in hash table</div>
-<ul class="choices" id="insert_string_reserve_memory_choices"></ul>
+<ul class="choices" id="insert_string_reserve_memory_choices"></ul> -->
 
 </div>
 

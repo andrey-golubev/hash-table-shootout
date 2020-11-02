@@ -16,7 +16,7 @@ build/qlist_qt6: src/qt_qlist.cc src/contiguous_containers_template.cc
 	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/qt5/qtbase/lib/ -I${HOME}/work/build/qt5/qtbase/include/ -lQt6Core -o build/qlist_qt6 src/qt_qlist.cc -fPIC
 
 build/std_vector515: src/std_vector.cc src/contiguous_containers_template.cc
-	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/5.15/qtbase/lib/ -I${HOME}/work/build/5.15/qtbase/include/ -lQt5Core -o build/std_vector src/std_vector.cc -fPIC
+	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/5.15/qtbase/lib/ -I${HOME}/work/build/5.15/qtbase/include/ -lQt5Core -o build/std_vector515 src/std_vector.cc -fPIC
 
 build/qlist_qt515: src/qt_qlist515.cc src/contiguous_containers_template.cc
 	$(CXX) $(CXX_FLAGS) -L${HOME}/work/build/5.15/qtbase/lib/ -I${HOME}/work/build/5.15/qtbase/include/ -lQt5Core -o build/qlist_qt515 src/qt_qlist515.cc -fPIC
