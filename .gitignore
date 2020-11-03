@@ -3,3 +3,5 @@ output
 charts.html
 .vscode/
 *.pyc
+.html_report
+html_report.zip
