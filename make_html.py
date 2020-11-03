@@ -2,6 +2,25 @@
 
 import sys
 
+ops = [
+    'append_',
+    'prepend_',
+    'insert1_mid_',
+    'insert1_quarter_',
+    'insert1_last_quarter_',
+    'access_every_',
+    'remove_first_',
+    'remove_mid_',
+    'remove_last_',
+]
+
+suffixes = [
+    'int',
+    'qstr',
+    'stdstr',
+    'three_ptrs',
+]
+
 op2html = {
     'append_': '<h3>Append one element: execution time</h3></br><p>Appending into container, without prior space reservation.</p></br>',
     'prepend_': '<h3>Prepend one element: execution time</h3></br><p>Prepending into container, without prior space reservation.</p></br>',
@@ -29,20 +48,9 @@ def construct_table(suffix, op):
     checkboxes = '<ul class="choices" id="%s_choices"></ul>' % identifier
     return '\n'.join([heading, '</br>', '\n'.join([chart, title, checkboxes]), '</br>'])
 
-def insert_bench_layout(html_template):
-    ops = [
-        'append_',
-        'prepend_',
-        'insert1_mid_',
-        'insert1_quarter_',
-        'insert1_last_quarter_',
-        'access_every_',
-        'remove_first_',
-        'remove_mid_',
-        'remove_last_',
-    ]
-
-    for suffix in ["int", "qstr", "stdstr", "three_ptrs"]:
+def insert_charts(html_template):
+    # group by type:
+    for suffix in suffixes:
         # construct full table
         full_table = []
         for op in ops:
@@ -52,6 +60,24 @@ def insert_bench_layout(html_template):
 
     return html_template
 
+def construct_js_line_runtime(suffix, op):
+    identifier = op + suffix
+    js_line = "        plot_chart(chart_data['%s_runtime'], '#%s', '#%s_choices', runtime_settings, redraw_only);" % (identifier, identifier, identifier)
+    return js_line
+
+
+def insert_plot_data_logic(html_template):
+    full_js_script = []
+    # group by operation:
+    for op in ops:
+        full_js_script.append("        // operation - %s*" % op)
+        for suffix in suffixes:
+            full_js_script.append(construct_js_line_runtime(suffix, op))
+        full_js_script.append('\n')
+    return html_template.replace('__PLOT_FUNC_RUNTIME_DATA_GOES_HERE__', '\n'.join(full_js_script))
+
 html_template = file('charts-template.html', 'r').read()
-html_template = insert_bench_layout(html_template)
+html_template = insert_charts(html_template)
+# js plot function logic:
+html_template = insert_plot_data_logic(html_template)
 file('charts.html', 'w').write(html_template.replace('__CHART_DATA_GOES_HERE__', sys.stdin.read()))
