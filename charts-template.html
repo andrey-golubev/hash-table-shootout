@@ -280,18 +280,33 @@
 
 <h2>Integers</h2>
 
-<p>For the integers tests, we use hash maps with int64_t as key and int64_t as value.</p>
+<p>For the integers tests, we use containers with `int` values (typically 32-bit).</p>
+
+__TEST_DATA_INT_GOES_HERE__
 
 
-<h3>Append one element: execution time (integers)</h3>
+<h2>QStrings</h2>
 
-<p>Appending one element into a container, without prior space reservation.</p>
+<p>For the QString tests, we use containers with `QString` values. Containers
+marked that they use Qt 5.15 use QString from 5.15, otherwise, QString from 6.0
+is used.</p>
 
-<div class="chart" id="append_int"></div>
-<div class="xaxis-title">number of entries in container</div>
-<ul class="choices" id="append_int_choices"></ul>
+__TEST_DATA_QSTR_GOES_HERE__
 
 
+<h2>C++ standard library strings</h2>
+
+<p>For the std::string tests, we use containers with `std::string` values.</p>
+
+__TEST_DATA_STDSTR_GOES_HERE__
+
+
+<h2>Three pointers</h2>
+
+<p>For the "three pointers" tests, we use containers with a custom structure
+type values. The struct contains 3 pointers (e.g. `void*`)</p>
+
+__TEST_DATA_THREE_PTRS_GOES_HERE__
 
 
 <!-- <h3>Random shuffle inserts: execution time (integers)</h3>
