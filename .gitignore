@@ -2,3 +2,4 @@ build
 output
 charts.html
 .vscode/
+*.pyc

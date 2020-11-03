@@ -2,17 +2,7 @@
 
 import sys
 
-ops = [
-    'append_',
-    'prepend_',
-    'insert1_mid_',
-    'insert1_quarter_',
-    'insert1_last_quarter_',
-    'access_every_',
-    'remove_first_',
-    'remove_mid_',
-    'remove_last_',
-]
+import bench_common
 
 suffixes = [
     'int',
@@ -53,7 +43,7 @@ def insert_charts(html_template):
     for suffix in suffixes:
         # construct full table
         full_table = []
-        for op in ops:
+        for op in bench_common.ops:
             minitable = construct_table(suffix, op)
             full_table.append(minitable)
         html_template = html_template.replace(suffix2pos[suffix], '\n</br>\n'.join(full_table))
@@ -69,7 +59,7 @@ def construct_js_line_runtime(suffix, op):
 def insert_plot_data_logic(html_template):
     full_js_script = []
     # group by operation:
-    for op in ops:
+    for op in bench_common.ops:
         full_js_script.append("        // operation - %s*" % op)
         for suffix in suffixes:
             full_js_script.append(construct_js_line_runtime(suffix, op))

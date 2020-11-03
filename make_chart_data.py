@@ -15,8 +15,7 @@ for line in lines:
     load_factor = float(load_factor)
 
     by_benchtype.setdefault("%s_runtime" % benchtype, {}).setdefault(program, []).append([nkeys, runtime, load_factor])
-    # if benchtype in ('append_int'):
-    by_benchtype.setdefault("%s_memory"  % benchtype, {}).setdefault(program, []).append([nkeys, nbytes, load_factor])
+    # by_benchtype.setdefault("%s_memory"  % benchtype, {}).setdefault(program, []).append([nkeys, nbytes, load_factor])
 
 proper_names = OrderedDict([
     ('std_vector', 'std::vector'),
