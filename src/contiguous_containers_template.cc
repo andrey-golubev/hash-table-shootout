@@ -32,6 +32,10 @@ static const std::array<char, 62> ALPHANUMERIC_CHARS = {
 #define CLEAN_RESIZE(container, size) { container = decltype(container)(size); }
 #endif
 
+#ifndef ACCESS
+#define ACCESS(container, pos) container[(pos)];
+#endif
+
 /**
  * SMALL_STRING_SIZE should be small enough so that there is no heap allocation when a std::string is created.
  */
@@ -172,7 +176,7 @@ int main(int argc, char ** argv) {
         }
     };
 
-    const auto access_every = [&] (auto &container, auto expected) {
+    const auto access_every = [&] (const auto &container, auto expected) {
         measurements m;
         for(std::int64_t i = 0; i < num_keys; i++) {
             auto value = ACCESS(container, i);

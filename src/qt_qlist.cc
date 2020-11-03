@@ -18,7 +18,6 @@ typedef QList<ThreePtrs> three_ptrs_container_t;
 #define PREPEND(container, val) container.prepend(val);
 #define INSERT_1(container, pos, val) container.insert((pos), val);
 #define REMOVE(container, pos) container.remove((pos));
-#define ACCESS(container, pos) container[(pos)];
 
 
 #include "contiguous_containers_template.cc"

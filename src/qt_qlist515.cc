@@ -19,7 +19,6 @@ typedef QList<ThreePtrs> three_ptrs_container_t;
 #define PREPEND(container, val) container.prepend(val);
 #define INSERT_1(container, pos, val) container.insert((pos), val);
 #define REMOVE(container, pos) container.erase(container.begin() + (pos));
-#define ACCESS(container, pos) container[(pos)];
 #define CLEAN_RESIZE(container, size) { container = QVector<typename decltype(container)::value_type>(int(size)).toList(); }
 
 #define LOAD_FACTOR(...) 0.0
