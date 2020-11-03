@@ -28,6 +28,10 @@ static const std::array<char, 62> ALPHANUMERIC_CHARS = {
 #define LOAD_FACTOR(container) (container.capacity() == 0 ? 0.0 : double(container.size()) / double(container.capacity()))
 #endif
 
+#ifndef CLEAN_RESIZE  // QList 5.15 defines
+#define CLEAN_RESIZE(container, size) { container = decltype(container)(size); }
+#endif
+
 /**
  * SMALL_STRING_SIZE should be small enough so that there is no heap allocation when a std::string is created.
  */

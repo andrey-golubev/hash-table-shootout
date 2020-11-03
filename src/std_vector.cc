@@ -19,7 +19,6 @@ typedef std::vector<ThreePtrs> three_ptrs_container_t;
 #define INSERT_1(container, pos, val) container.insert(container.begin() + (pos), val);
 #define REMOVE(container, pos) container.erase(container.begin() + (pos));
 #define ACCESS(container, pos) container[(pos)];
-#define CLEAN_RESIZE(container, size) { container.clear(); container.resize(size); }
 
 
 #include "contiguous_containers_template.cc"
