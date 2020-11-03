@@ -4,14 +4,6 @@ import sys, os, subprocess, signal
 
 import bench_common
 
-programs = [
-    'std_vector',
-    'std_vector515',
-    'qlist_qt6',
-    'qlist_qt515',
-    'qvector_qt515',
-]
-
 count_multipliers = {
     'append_': 100, # append is generally very fast
     'prepend_': 1,
@@ -51,7 +43,7 @@ for nkeys in range(minkeys, maxkeys + 1, interval):
         # adjust number of iterations based on operation type
         adjusted_nkeys = nkeys * count_multipliers[find_op(benchtype)]
 
-        for program in programs:
+        for program in bench_common.programs:
             if program.startswith('tsl_array_map') and 'string' not in benchtype:
                 continue
 
