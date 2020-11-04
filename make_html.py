@@ -21,6 +21,8 @@ op2html = {
     'remove_first_': '<h3>Remove first element: execution time</h3></br><p>Resize container to specified size, remove first element in a loop.</p></br>',
     'remove_mid_': '<h3>Remove middle element: execution time</h3></br><p>Resize container to specified size, remove middle element in a loop.</p></br>',
     'remove_last_': '<h3>Remove last element: execution time</h3></br><p>Resize container to specified size, remove last element in a loop.</p></br>',
+    'remove_first_special_': '<h3>Remove first element (special case): execution time</h3></br><p>Resize container to specified size, remove first element in a loop, calling removeFirst() for Qt containers.</p></br>',
+    'remove_last_special_': '<h3>Remove last element (special case): execution time</h3></br><p>Resize container to specified size, remove last element in a loop, calling removeLast() for Qt containers.</p></br>',
 }
 
 suffix2pos = {

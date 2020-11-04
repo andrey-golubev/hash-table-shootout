@@ -14,6 +14,8 @@ count_multipliers = {
     'remove_first_': 1,
     'remove_mid_': 1,
     'remove_last_': 100,
+    'remove_first_special_': 1,
+    'remove_last_special_': 100,
 }
 
 def find_op(benchtype):

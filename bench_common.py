@@ -10,6 +10,8 @@ ops = [
     'remove_first_',
     'remove_mid_',
     'remove_last_',
+    'remove_first_special_',
+    'remove_last_special_',
 ]
 
 programs = [

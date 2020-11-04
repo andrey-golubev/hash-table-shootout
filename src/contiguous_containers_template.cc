@@ -36,6 +36,14 @@ static const std::array<char, 62> ALPHANUMERIC_CHARS = {
 #define ACCESS(container, pos) container[(pos)];
 #endif
 
+#ifndef REMOVE_FIRST
+#define REMOVE_FIRST(container) container.removeFirst();
+#endif
+
+#ifndef REMOVE_LAST
+#define REMOVE_LAST(container) container.removeLast();
+#endif
+
 /**
  * SMALL_STRING_SIZE should be small enough so that there is no heap allocation when a std::string is created.
  */
@@ -205,6 +213,20 @@ int main(int argc, char ** argv) {
         }
     };
 
+    const auto remove_last_special = [&] (auto &container) {
+        measurements m;
+        for(std::int64_t i = 0; i < num_keys; i++) {
+            REMOVE_LAST(container);
+        }
+    };
+
+    const auto remove_first_special = [&] (auto &container) {
+        measurements m;
+        for(std::int64_t i = 0; i < num_keys; i++) {
+            REMOVE_FIRST(container);
+        }
+    };
+
     const auto append_suffix = [] (std::string workload, const std::string& suffix) {
         workload += suffix;
         return workload;
@@ -253,6 +275,18 @@ int main(int argc, char ** argv) {
             auto copy = container;
             CLEAN_RESIZE(copy, num_keys + 1);
             remove_last(copy);
+            return true;
+        }
+        else if(test_type == append_suffix("remove_first_special_", suffix)) {
+            auto copy = container;
+            CLEAN_RESIZE(copy, num_keys + 1);
+            remove_first_special(copy);
+            return true;
+        }
+        else if(test_type == append_suffix("remove_last_special_", suffix)) {
+            auto copy = container;
+            CLEAN_RESIZE(copy, num_keys + 1);
+            remove_last_special(copy);
             return true;
         }
         else {

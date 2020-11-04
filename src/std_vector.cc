@@ -18,6 +18,8 @@ typedef std::vector<ThreePtrs> three_ptrs_container_t;
 #define PREPEND(container, val) container.insert(container.begin(), val);
 #define INSERT_1(container, pos, val) container.insert(container.begin() + (pos), val);
 #define REMOVE(container, pos) container.erase(container.begin() + (pos));
+#define REMOVE_FIRST(container) container.erase(container.begin());
+#define REMOVE_LAST(container) container.erase(container.end() - 1);
 
 
 #include "contiguous_containers_template.cc"
